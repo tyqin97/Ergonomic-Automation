@@ -1,4 +1,4 @@
-from win10toast import ToastNotifier
+import win10toast
 import mysql.connector
 import os, requests
 from PIL import Image
@@ -18,9 +18,9 @@ finally:
 
 def GetConnection():
     mydb = mysql.connector.connect(
-        host="",
-        user="",
-        password="",
+        host="192.168.2.97",
+        user="Greatech",
+        password="Greatech@123",
         database="ergonomic")
     return mydb
 
@@ -104,7 +104,12 @@ def ImageDownload(web_url, img_name):
     return img_name
 
 def Notifier(title, content, duration, icon_path):
-    n = ToastNotifier()
+    n = win10toast.ToastNotifier()
     n.show_toast(title, content, duration = duration, icon_path = icon_path)
 
-CheckSequence(GetConnection())
+try:
+    CheckSequence(GetConnection())
+except:
+    print("ERROR IN APPS")
+finally:
+    pass
